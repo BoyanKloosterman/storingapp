@@ -36,9 +36,9 @@
             <th>Prioriteit</th>
             <th>Capaciteit</th>
             <th>Gemeld op</th>
+            <th>Aanpassen</th>
         </tr>
        <?php foreach ($meldingen as $melding): ?>
-        <tr>
        <td> <?php echo $melding['attractie']; ?> </td>
        <td> <?php echo $melding['type']; ?> </td>
        <td><?php echo $melding['melder']; ?></td>
@@ -51,6 +51,7 @@
         } ?> </td>
         <td><?php echo$melding['capaciteit']; ?></td>
         <td><?php echo$melding['gemeld_op']; ?></td>
+        <td> <a href="edit.php">Aanpassen</a></td>
         </tr>
         <?php endforeach;?>
     </table>
