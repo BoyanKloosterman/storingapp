@@ -34,8 +34,7 @@ if(empty($melder))
 	$errors [] = "Vul uw naam in";
 }
 //
-$overig = $_POST['overig'];
-
+$overige_info = $_POST['overige_info'];
 if(isset($errors))
 {
 	var_dump($errors);
@@ -47,7 +46,7 @@ if(isset($errors))
 require_once 'conn.php';
 
 //2. Query
-$query = "INSERT INTO meldingen (attractie, type, prioriteit, capaciteit, melder, overig) VALUES(:attractie, :type, :prioriteit, :capaciteit, :melder, :overig)";
+$query = "INSERT INTO meldingen (attractie, type, prioriteit, capaciteit, melder, overige_info) VALUES(:attractie, :type, :prioriteit, :capaciteit, :melder, :overige_info)";
 
 //3. Prepare
 $statement = $conn->prepare($query);
@@ -59,7 +58,7 @@ $statement->execute([
 	":prioriteit" => $prioriteit,
 	":capaciteit" => $capaciteit,
 	":melder" => $melder,
-	":overig" => $overig,
+	":overige_info" => $overige_info,
 ]);
 
 header("Location:../meldingen/index.php?msg=Melding opgeslagen");

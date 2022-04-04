@@ -356,4 +356,6 @@ label{
     page-break-after: avoid;
   }
 }
-
+tr:first-child{
+  background-color: #d3d3d3;
+}
