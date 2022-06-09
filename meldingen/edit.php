@@ -14,35 +14,21 @@
         <h1>Melding aanpassen</h1>
 
         <?php
-        //Haal het id uit de URL:
+        require_once '../backend/conn.php';
         $id = $_GET['id'];
-
-        //1. Haal de verbinding erbij
-        {
-            echo "<a href='detail.php?id={$melding['id']}'/>";
-        }
-
-        //2. Query, vul deze aan met een WHERE zodat je alleen de melding met dit id ophaalt
         $query="SELECT * FROM meldingen WHERE id =:id";
-
-        //3. Van query naar statement
         $statement = $conn->prepare($query);
-
-        //4. Voer de query uit, voeg hier nog de placeholder toe
-        $statement->execute([
-            ":id" => $id
-        ]);
-
-        //5. Ophalen gegevens, tip: gebruik hier fetch().
-        $melding = statement->fetch(PDO::FETCH_ASSOC);
+        $statement->execute([":id" => $id]);
+        $melding = $statement->fetch(PDO::FETCH_ASSOC);
         ?>
 
-        <form action="........." method="POST">
-            <!-- (voeg hier opdracht 7 toe) -->
+        <form action="../backend/meldingenController.php" method="POST">
+            <input type="hidden" name="action" value="update">
+            <input type="hidden" name="id" value="<?php echo $id; ?>">
 
             <div class="form-group">
-                <label>Naam attractie:</label>
-                <?php echo $melding['attractie']; ?>
+                <label for="attractie">Naam attractie:</label>
+                <input type= "text" name ="titel" value="<?php echo $melding['attractie']; ?>" id = "attractie">
             </div>
             <!-- Zorg dat het type wordt getoond, net als de naam hierboven -->
             <div class="form-group">
@@ -53,21 +39,27 @@
             <div class="form-group">
                 <label for="prioriteit">Prio:</label>
                 <!-- Let op: de checkbox blijft nu altijd uit, pas dit nog aan -->
-                <input type="checkbox" name="prioriteit" id="prioriteit">
+                <input type="checkbox" name="prioriteit" id="prioriteit" value="<?php echo $melding['prioriteit']; ?>">
                 <label for="prioriteit">Melding met prioriteit</label>
             </div>
             <div class="form-group"> 
                 <label for="melder">Naam melder:</label>
                 <!-- Voeg hieronder nog een value-attribuut toe, zoals bij capaciteit -->
-                <input type="text" name="melder" id="melder" class="form-input">
+                <input type="text" name="melder" id="melder" class="form-input" value="<?php echo $melding['melder']; ?>">
             </div>
             <div class="form-group">
                 <label for="overig">Overige info:</label>
-                <textarea name="overig" id="overig" class="form-input" rows="4">.....</textarea>
+                <textarea name="overig" id="overig" class="form-input" rows="4"><?php echo $melding['overig']; ?> </textarea>
             </div>
             
             <input type="submit" value="Melding opslaan">
 
+
+            <form action="../backend/taskController.php" method="POST">
+            <input type="hidden" name="action" value="delete">
+            <input type="hidden" name="id" value="<?php echo $id; ?>">
+            <input type="submit" value="Verwijder bericht">
+        </form>
         </form>
     </div>  
 
