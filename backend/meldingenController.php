@@ -63,7 +63,7 @@ $statement->execute([
 	":melder" => $melder,
 	":overige_info" => $overige_info
 ]);
-header("Location:../Task/index.php?msg=Melding opgeslagen");
+header("Location:../index.php?msg=Melding opgeslagen");
 }
 
 
@@ -96,7 +96,7 @@ if($action == 'update')
 		":overige_info" => $overige_info,
 		":id" => $id
 	]);
-	header("Location:../Task/index.php?msg=Melding opgeslagen");
+	header("Location:../index.php?msg=Melding opgeslagen");
 }
 
 if($action == 'delete')
@@ -108,5 +108,5 @@ if($action == 'delete')
         $statement->execute([
             ":id" => $id
         ]);
-        header("Location:../Task/index.php?msg=Taak verwijderd");
+        header("Location:../index.php?msg=Taak verwijderd");
 	}
