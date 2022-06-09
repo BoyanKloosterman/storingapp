@@ -49,17 +49,15 @@
             </div>
             <div class="form-group">
                 <label for="overig">Overige info:</label>
-                <textarea name="overig" id="overig" class="form-input" rows="4"><?php echo $meldingen['overig']; ?> </textarea>
+                <textarea name="overig" id="overig" class="form-input" rows="4"><?php echo $meldingen['overige_info']; ?> </textarea>
             </div>
-            
             <input type="submit" value="Melding opslaan">
-
+        </form>
 
             <form action="../backend/taskController.php" method="POST">
             <input type="hidden" name="action" value="delete">
             <input type="hidden" name="id" value="<?php echo $id; ?>">
             <input type="submit" value="Verwijder bericht">
-        </form>
         </form>
     </div>  
 
