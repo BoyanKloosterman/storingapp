@@ -98,3 +98,15 @@ if($action == 'update')
 	]);
 	header("Location:../Task/index.php?msg=Melding opgeslagen");
 }
+
+if($action == 'delete')
+    {
+        $id = $_POST['id'];
+        require_once 'conn.php';
+        $query = "DELETE FROM meldingen WHERE id = :id";
+        $statement = $conn->prepare($query);
+        $statement->execute([
+            ":id" => $id
+        ]);
+        header("Location:../Task/index.php?msg=Taak verwijderd");
+	}
