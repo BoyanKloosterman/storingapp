@@ -34,7 +34,7 @@
             <div class="form-group">
                 <label for="capaciteit">Capaciteit p/uur:</label>
                 <input type="number" min="0" name="capaciteit" id="capaciteit" class="form-input"
-                    value="<?php echo $melding['capaciteit']; ?>">
+                    value="<?php echo $meldingen['capaciteit']; ?>">
             </div>
             <div class="form-group">
                 <label for="prioriteit">Prio:</label>
@@ -51,9 +51,8 @@
                 <label for="overig">Overige info:</label>
                 <textarea name="overig" id="overig" class="form-input" rows="4"><?php echo $melding['overig']; ?> </textarea>
             </div>
-            
             <input type="submit" value="Melding opslaan">
-
+        </form>
 
             <form action="../backend/taskController.php" method="POST">
             <input type="hidden" name="action" value="delete">
