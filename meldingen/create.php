@@ -14,7 +14,8 @@
         <h1>Nieuwe melding</h1>
 
         <form action="../backend/meldingenController.php" method="POST">
-        
+            <input type="hidden" name="action" value="create">
+            <input type="hidden" name="id" value="<?php echo $id; ?>">	
             <div class="form-group">
                 <label for="attractie">Naam attractie:</label>
                 <input type="text" name="attractie" id="attractie" class="form-input">
@@ -23,13 +24,13 @@
                 <label for="type">Type</label>
                 <select name="type" id="type">
                     <option value=""> Kies het type </option>
-                    <option value="A"> Achtbaan </option>
-                    <option value="B"> Draaiend </option>
-                    <option value="C"> Kinder </option>
-                    <option value="D"> Horeca </option>
-                    <option value="E"> Show </option>
-                    <option value="F"> Water </option>
-                    <option value="G"> Overig </option>
+                    <option value="Achtbaan"> Achtbaan </option>
+                    <option value="Draaiend"> Draaiend </option>
+                    <option value="Kinder"> Kinder </option>
+                    <option value="Horeca"> Horeca </option>
+                    <option value="Show"> Show </option>
+                    <option value="Water"> Water </option>
+                    <option value="Overig"> Overig </option>
                 </select>
             </div>
             <div class="form-group">
