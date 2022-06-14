@@ -19,7 +19,8 @@
         $query="SELECT * FROM meldingen WHERE id =:id";
         $statement = $conn->prepare($query);
         $statement->execute([":id" => $id]);
-        $melding = $statement->fetch(PDO::FETCH_ASSOC);
+        $meldingen = $statement->fetch(PDO::FETCH_ASSOC);
+        
         ?>
 
         <form action="../backend/meldingenController.php" method="POST">
@@ -28,8 +29,9 @@
 
             <div class="form-group">
                 <label for="attractie">Naam attractie:</label>
-                <input type= "text" name ="titel" value="<?php echo $melding['attractie']; ?>" id = "attractie">
+                <input type= "text" name ="titel" value="<?php echo $meldingen['attractie'];  ?>" id = "attractie">
             </div>
+        
             <!-- Zorg dat het type wordt getoond, net als de naam hierboven -->
             <div class="form-group">
                 <label for="capaciteit">Capaciteit p/uur:</label>
@@ -39,19 +41,20 @@
             <div class="form-group">
                 <label for="prioriteit">Prio:</label>
                 <!-- Let op: de checkbox blijft nu altijd uit, pas dit nog aan -->
-                <input type="checkbox" name="prioriteit" id="prioriteit" value="<?php echo $melding['prioriteit']; ?>">
+                <input type="checkbox" name="prioriteit" id="prioriteit" value="<?php echo $meldingen['prioriteit']; ?>">
                 <label for="prioriteit">Melding met prioriteit</label>
             </div>
             <div class="form-group"> 
                 <label for="melder">Naam melder:</label>
                 <!-- Voeg hieronder nog een value-attribuut toe, zoals bij capaciteit -->
-                <input type="text" name="melder" id="melder" class="form-input" value="<?php echo $melding['melder']; ?>">
+                <input type="text" name="melder" id="melder" class="form-input" value="<?php echo $meldingen['melder']; ?>">
             </div>
             <div class="form-group">
-                <label for="overig">Overige info:</label>
-                <textarea name="overig" id="overig" class="form-input" rows="4"><?php echo $melding['overig']; ?> </textarea>
+                <label for="overige_info">Overige info:</label>
+                <textarea name="overige_info" id="overige_info" class="form-input" rows="4"><?php echo $meldingen['overige_info']; ?> </textarea>
             </div>
             <input type="submit" value="Melding opslaan">
+            
         </form>
 
             <form action="../backend/taskController.php" method="POST">

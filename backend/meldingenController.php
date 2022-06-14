@@ -37,7 +37,7 @@ if(empty($melder))
 	$errors [] = "Vul uw naam in";
 }
 //
-$overige_info = $_POST['overig'];
+$overige_info = $_POST['overige_info'];
 if(isset($errors))
 {
 	var_dump($errors);
@@ -71,10 +71,18 @@ if($action == 'update')
 {
 	$id = $_POST['id'];
 	$attractie = $_POST['attractie'];
-	$type = $_POST['type'];
-	$capaciteit = $_POST['capaciteit'];
+	if(empty($attractie))
+	{
+		$errors[] = "Vul de attractie-naam in";
+	}
 	//
-	if(isset($_POST['prioriteit']))
+	$type = $_POST['type'];
+	if(empty($type))
+	{
+		$errors[] = "Kies uw type";
+	}
+	//
+	if (isset($_POST['prioriteit']))
 	{
 		$prioriteit = true;
 	}
@@ -83,17 +91,35 @@ if($action == 'update')
 		$prioriteit = false;
 	}
 	//
-	$overige_info = $_POST['overig'];
+	$capaciteit = $_POST['capaciteit'];
+	if(!is_numeric($capaciteit))
+	{
+		$errors[] = "Vul voor capaciteit een geldig getal in";
+	} 
+	//
+	$melder = $_POST['melder'];
+	if(empty($melder))
+	{
+		$errors [] = "Vul uw naam in";
+	}
+	//
+	$overige_info = $_POST['overige_info'];
+	if(isset($errors))
+	{
+		var_dump($errors);
+		die();
+	}
+	
 
 	require_once 'conn.php';
-	$query = "UPDATE meldingen SET attractie = :attractie, type = :type, capaciteit = :capaciteit, prioriteit = :prioriteit, overige_info = :overige_info WHERE id = :id";
+	$query = "UPDATE meldingen SET attractie = :attractie, type = :type, prioriteit =:prioriteit, capaciteit = :capaciteit, overige_info = :overige_info WHERE id = :id";
 	$statement = $conn->prepare($query);
 	$statement->execute([
 		":attractie" => $attractie,
 		":type" => $type,	
 		":capaciteit" => $capaciteit,
 		":prioriteit" => $prioriteit,
-		":overige_info" => $overige_info,
+		":overig_info" => $overige_info,
 		":id" => $id
 	]);
 	header("Location:../Task/index.php?msg=Melding opgeslagen");
