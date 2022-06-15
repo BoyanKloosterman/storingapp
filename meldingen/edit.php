@@ -57,7 +57,7 @@
             
         </form>
 
-            <form action="../backend/taskController.php" method="POST">
+            <form action="../backend/meldingenController.php" method="POST">
             <input type="hidden" name="action" value="delete">
             <input type="hidden" name="id" value="<?php echo $id; ?>">
             <input type="submit" value="Verwijder bericht">

@@ -63,7 +63,7 @@ $statement->execute([
 	":melder" => $melder,
 	":overige_info" => $overige_info
 ]);
-header("Location:../Task/index.php?msg=Melding opgeslagen");
+header("Location:../meldingen/index.php?msg=Melding opgeslagen");
 }
 
 
@@ -76,32 +76,11 @@ if($action == 'update')
 		$errors[] = "Vul de attractie-naam in";
 	}
 	//
-	$type = $_POST['type'];
-	if(empty($type))
-	{
-		$errors[] = "Kies uw type";
-	}
-	//
-	if (isset($_POST['prioriteit']))
-	{
-		$prioriteit = true;
-	}
-	else
-	{
-		$prioriteit = false;
-	}
-	//
 	$capaciteit = $_POST['capaciteit'];
 	if(!is_numeric($capaciteit))
 	{
 		$errors[] = "Vul voor capaciteit een geldig getal in";
 	} 
-	//
-	$melder = $_POST['melder'];
-	if(empty($melder))
-	{
-		$errors [] = "Vul uw naam in";
-	}
 	//
 	$overige_info = $_POST['overige_info'];
 	if(isset($errors))
@@ -112,15 +91,26 @@ if($action == 'update')
 	
 
 	require_once 'conn.php';
-	$query = "UPDATE meldingen SET attractie = :attractie, type = :type, prioriteit =:prioriteit, capaciteit = :capaciteit, overige_info = :overige_info WHERE id = :id";
+	$query = "UPDATE meldingen SET attractie = :attractie, capaciteit = :capaciteit, overige_info = :overige_info WHERE id = :id";
 	$statement = $conn->prepare($query);
 	$statement->execute([
 		":attractie" => $attractie,
-		":type" => $type,	
 		":capaciteit" => $capaciteit,
-		":prioriteit" => $prioriteit,
 		":overig_info" => $overige_info,
 		":id" => $id
 	]);
-	header("Location:../Task/index.php?msg=Melding opgeslagen");
+	header("Location:../meldingen/index.php?msg=Melding opgeslagen");
 }
+
+
+if($action == 'delete')
+    {
+        $id = $_POST['id'];
+        require_once 'conn.php';
+        $query = "DELETE FROM meldingen WHERE id = :id";
+        $statement = $conn->prepare($query);
+        $statement->execute([
+            ":id" => $id
+        ]);
+        header("Location:../meldingen/index.php?msg=Melding verwijderd");
+    }
