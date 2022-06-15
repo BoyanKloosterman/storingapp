@@ -29,7 +29,7 @@
 
             <div class="form-group">
                 <label for="attractie">Naam attractie:</label>
-                <input type= "text" name ="titel" value="<?php echo $meldingen['attractie'];  ?>" id = "attractie">
+                <input type= "text" name ="titel" value="<?php echo $melding['attractie'];  ?>" id = "attractie">
             </div>
         
             <!-- Zorg dat het type wordt getoond, net als de naam hierboven -->

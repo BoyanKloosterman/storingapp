@@ -88,8 +88,6 @@ if($action == 'update')
 		var_dump($errors);
 		die();
 	}
-	
-
 	require_once 'conn.php';
 	$query = "UPDATE meldingen SET attractie = :attractie, capaciteit = :capaciteit, overige_info = :overige_info WHERE id = :id";
 	$statement = $conn->prepare($query);
