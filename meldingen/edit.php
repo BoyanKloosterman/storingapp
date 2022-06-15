@@ -20,7 +20,15 @@
         $statement = $conn->prepare($query);
         $statement->execute([":id" => $id]);
         $meldingen = $statement->fetch(PDO::FETCH_ASSOC);
-        
+        json_encode($meldingen );
+        if(!isset($_GET['id'])){
+            echo 'Vergeet niet een id mee te geven';
+            exit;
+        }
+        if($meldingen===false){
+            echo 'Er was geen data voor deze id';
+            exit;
+        }
         ?>
 
         <form action="../backend/meldingenController.php" method="POST">
@@ -29,7 +37,7 @@
 
             <div class="form-group">
                 <label for="attractie">Naam attractie:</label>
-                <input type= "text" name ="titel" value="<?php echo $melding['attractie'];  ?>" id = "attractie">
+                <input type= "text" name ="titel" value="<?php echo $meldingen['attractie'];  ?>" id = "attractie">
             </div>
         
             <!-- Zorg dat het type wordt getoond, net als de naam hierboven -->
