@@ -14,6 +14,7 @@
     <div class="container">
         <h1>Meldingen</h1>
         <a href="create.php">Nieuwe melding &gt;</a>
+        
 
         <?php if(isset($_GET['msg']))
         {
@@ -27,7 +28,8 @@
        $statement->execute();
        $meldingen = $statement->fetchAll(PDO::FETCH_ASSOC);
        ?>
-       
+    <p>Aantal meldingen: <strong><?php echo count($meldingen); ?></strong></p>
+
     <table>
         <tr>
             <th>Titel</th>

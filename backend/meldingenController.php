@@ -4,7 +4,7 @@ $action = $_POST["action"];
 //Variabelen vullen
 if ($action == "create")
 {
-	$attractie = $_POST['attractie'];
+$attractie = $_POST['attractie'];
 if(empty($attractie))
 {
 	$errors[] = "Vul de attractie-naam in";
