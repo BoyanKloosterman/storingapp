@@ -52,7 +52,7 @@
         } ?> </td>
         <td><?php echo$melding['capaciteit']; ?></td>
         <td><?php echo$melding['gemeld_op']; ?></td>
-        <td> <a href="edit.php">Aanpassen</a></td>
+        <td> <a href="edit.php?id=<?php echo $melding['id']; ?>">Aanpassen</a></td>
         </tr>
         <?php endforeach;?>
     </table>
