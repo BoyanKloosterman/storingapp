@@ -12,5 +12,6 @@
         <?php else: ?>
             <p><a href="<?php echo $base_url ?>/login.php">Inloggen</a></p>
         <?php endif; ?>
+        <p><a href="<?php echo $base_url ?>/register.php">Registreren</a></p>
     </div>
 </header>
