@@ -359,3 +359,7 @@ label{
 tr:first-child{
   background-color: #d3d3d3;
 }
+.bovenkant{
+  display: flex;
+  justify-content: space-between;
+}

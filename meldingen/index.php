@@ -23,12 +23,35 @@
 
        <?php
        require_once "../backend/conn.php";
-       $query = "SELECT * FROM meldingen";
-       $statement = $conn->prepare($query);
-       $statement->execute();
-       $meldingen = $statement->fetchAll(PDO::FETCH_ASSOC);
+       if(empty($_GET['type'])){
+        $query = "SELECT * FROM meldingen";
+        $statement = $conn->prepare($query);
+        $statement->execute();
+        $meldingen = $statement->fetchAll(PDO::FETCH_ASSOC);
+       }
+       else{
+        $query = "SELECT * FROM meldingen WHERE type = :type";
+        $statement = $conn->prepare($query);
+        $statement->execute([":type" => $_GET['type']]);
+        $meldingen = $statement->fetchAll(PDO::FETCH_ASSOC);
+       }
        ?>
+       <div class="bovenkant">
     <p>Aantal meldingen: <strong><?php echo count($meldingen); ?></strong></p>
+    <form action="" method="GET">
+        <select name="type">
+            <option value="">Alle meldingen </option>
+            <option value="Achtbaan"> Achtbaan </option>
+            <option value="Draaiend"> Draaiend </option>
+            <option value="Kinder"> Kinder </option>
+            <option value="Horeca"> Horeca </option>
+            <option value="Show"> Show </option>    
+            <option value="Water"> Water </option>  
+            <option value="Overig"> Overig </option>    
+            </select>
+            <input type="submit">
+        </form>
+       </div>
 
     <table>
         <tr>
@@ -43,7 +66,7 @@
         </tr>
        <?php foreach ($meldingen as $melding): ?>
        <td> <?php echo $melding['attractie']; ?> </td>
-       <td> <?php echo $melding['type']; ?> </td>
+       <td> <?php echo  ucfirst($melding['type']); ?> </td>
        <td><?php echo $melding['melder']; ?></td>
        <td><?php echo$melding['overige_info']; ?></td>
        <td><?php if($melding['prioriteit'] == 1){
