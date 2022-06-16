@@ -24,8 +24,8 @@ if ($password != $password_check)
 }
 
 require_once 'conn.php';
-$sql = "SELECT * from users WHERE username = :email";
-$statement = $conn->prepare($sql);
+$query = "SELECT * from users WHERE username = :email";
+$statement = $conn->prepare($query);
 $statement->execute([":email" => $email]);
 if ($statement->rowCount() > 0)
 {
@@ -36,10 +36,15 @@ if (empty($email) || empty($password))
     die("Vul alle velden in");
 }
 
+$hash = password_hash($password, PASSWORD_DEFAULT);
+
 $query = "INSERT INTO users (username, password) VALUES (:email, :hash)";
 $statement = $conn->prepare($query);
-$statement->execute([":email" => $email, ":hash" => $hash]);
+$statement->execute([
+    ":email" => $email,
+    ":hash" => $hash,
+]);
 
-header("Location: ../index.php");
+header("Location: ../meldingen/index.php");
 exit;
 ?>

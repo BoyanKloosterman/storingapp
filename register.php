@@ -10,7 +10,7 @@
     <?php require_once 'header.php'; ?>
     <main>
         <div class="login_main">
-            <form class="login_form" action="../backend/registerController.php" method="POST">
+            <form class="login_form" action="backend/registerController.php" method="POST">
                 <div class="login_form_group">
                     <label for="email">Email:</label>
                     <input name="email" id="email"type="text" class="login_form_input">
